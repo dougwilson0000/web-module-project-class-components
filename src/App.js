@@ -36,6 +36,26 @@ class App extends React.Component {
       todos: [...this.state.todos, newTodo]
      });
    }
+
+   handleToggle = (id) => {
+
+      
+      this.setState({
+        ...this.state,
+        todos: this.state.todos.map(todo => {
+          if (todo.id === id) {
+              return {
+                ...todo,
+                completed: !todo.completed
+              }
+          } 
+            return todo
+          
+        })
+      })
+   }
+
+
     handleClear = () => {
       this.setState({
         ...this.state,
@@ -55,7 +75,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Todos</h1>
-        <TodoList  todos={todos} /> 
+        <TodoList  handleToggle={this.handleToggle} todos={todos} /> 
         <TodoForm handleAdd={this.handleAdd}/>
         
         <button onClick={this.handleClear}>Clear</button>
